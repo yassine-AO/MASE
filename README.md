@@ -238,3 +238,77 @@ The project is developed by a team of three engineering students with provisiona
 
 - The repository currently contains only the planned structure and documentation.
 - No functional MASE components have been implemented yet.
+
+---
+
+## J. Local Development Setup
+
+### Prerequisites
+
+- **Python** 3.11+
+- **Node.js** 18+ and **npm**
+
+### 1. Environment Configuration
+
+Copy `.env.example` to `.env` at the repository root and adjust values if needed:
+
+```bash
+cp .env.example .env
+```
+
+On Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### 2. Backend Setup (FastAPI)
+
+Create a virtual environment, activate it, and install backend dependencies:
+
+```bash
+python -m venv .venv
+# Linux / macOS:
+source .venv/bin/activate
+# Windows PowerShell:
+# .\.venv\Scripts\Activate.ps1
+
+pip install -r backend/requirements.txt
+```
+
+Start the backend server from the repository root:
+
+```bash
+uvicorn backend.api.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Verify the health endpoint:
+
+```bash
+curl http://localhost:8000/health
+```
+
+Expected response:
+
+```json
+{"status":"ok","service":"mase-v2-backend","version":"0.1.0"}
+```
+
+### 3. Frontend Setup (React + TypeScript + Vite)
+
+Install frontend dependencies and start the development server:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173` in your browser to view the **MASE V2** starter UI and verify the backend connection status.
+
+To create a production build:
+
+```bash
+cd frontend
+npm run build
+```
